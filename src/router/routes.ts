@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { index, ValidationPage, StatisticsPage } from '@/pages';
+import { index, ValidationPage, StatisticsPage, HomePage } from '@/pages';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -8,6 +8,10 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
+        component: HomePage,
+      },
+      {
+        path: 'validation',
         component: ValidationPage,
       },
       {
