@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "188068533519",
+    "project_id": "veille-tech-agent",
+    "storage_bucket": "veille-tech-agent.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188068533519:android:da88308dd8f7f7cdbc5a7a",
+        "android_client_info": {
+          "package_name": "com.bearisoa.vtechadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHAL6MPSPA8iYoltIO8zpglld4nVxogLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
