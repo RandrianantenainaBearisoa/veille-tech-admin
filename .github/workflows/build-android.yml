@@ -1,0 +1,65 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: 2. Configurer Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: 3. Configurer Java 17 (requis pour Android/Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+          cache: "gradle"
+
+      - name: 4. Installer les dépendances Quasar
+        run: npm ci
+
+      - name: 5. Installer les dépendances Capacitor
+        working-directory: ./src-capacitor
+        run: npm ci
+
+      # - name: Restaurer google-services.json
+      #   run: |
+      #     mkdir -p src-capacitor/android/app
+      #     echo "${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}" | base64 --decode > src-capacitor/android/app/google-services.json
+
+      - name: 6. Compiler l'application Web Quasar
+        env:
+          QCLI_FIREBASE_API_KEY: ${{ secrets.QCLI_FIREBASE_API_KEY }}
+          QCLI_FIREBASE_AUTH_DOMAIN: ${{ secrets.QCLI_FIREBASE_AUTH_DOMAIN }}
+          QCLI_FIREBASE_PROJECT_ID: ${{ secrets.QCLI_FIREBASE_PROJECT_ID }}
+          QCLI_FIREBASE_STORAGE_BUCKET: ${{ secrets.QCLI_FIREBASE_STORAGE_BUCKET }}
+          QCLI_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.QCLI_FIREBASE_MESSAGING_SENDER_ID }}
+          QCLI_FIREBASE_APP_ID: ${{ secrets.QCLI_FIREBASE_APP_ID }}
+          QCLI_FIREBASE_VAPID_KEY: ${{ secrets.QCLI_FIREBASE_VAPID_KEY }}
+        run: npx quasar build
+
+      - name: 7. Synchroniser le build Web vers Android
+        working-directory: ./src-capacitor
+        run: npx cap sync android
+
+      - name: 8. Générer l'APK Debug
+        working-directory: ./src-capacitor/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: 9. Déposer l'APK dans les Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: src-capacitor/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
