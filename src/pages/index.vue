@@ -27,15 +27,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import EssentialLink, { type EssentialLinkProps } from '@/components/EssentialLink.vue';
-import { APP_NAME } from '@/static/constants';
-console.log(APP_NAME);
 
 const linksList: EssentialLinkProps[] = [
+  {
+    label: 'Accueil',
+    caption: "Page d'acceuil",
+    icon: 'home',
+    route: '/',
+  },
   {
     label: 'Validation',
     caption: 'Valider les Posts',
     icon: 'check',
-    route: '/',
+    route: '/validation',
   },
   {
     label: 'Statistiques',
