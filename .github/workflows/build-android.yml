@@ -17,11 +17,11 @@ jobs:
           node-version: "22"
           cache: "npm"
 
-      - name: 3. Configurer Java 17 (requis pour Android/Gradle)
+      - name: 3. Configurer Java 21 (requis pour Android/Gradle)
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
-          java-version: "17"
+          java-version: "21"
           cache: "gradle"
 
       - name: 4. Installer les dépendances Quasar
