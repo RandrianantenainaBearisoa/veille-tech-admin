@@ -1,7 +1,7 @@
 import { Capacitor } from '@capacitor/core';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { getToken, onMessage } from 'firebase/messaging';
-import { messaging } from './firebase';
+import { getWebMessaging } from './firebase';
 
 export async function initNotifications() {
   if (Capacitor.isNativePlatform()) {
@@ -51,6 +51,8 @@ export async function initNotifications() {
     // BRANCHE 2 : NAVIGATEUR WEB (Votre code qui marche déjà)
     // ==========================================
     try {
+      const messaging = await getWebMessaging();
+      if (!messaging) return null;
       const permission = await Notification.requestPermission();
       if (permission !== 'granted') return;
 
