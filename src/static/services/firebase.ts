@@ -15,12 +15,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: FIREBASE_APIKEY,
-  authDomain: FIREBASE_AUTHDOMAIN,
-  projectId: FIREBASE_PROJECTID,
-  storageBucket: FIREBASE_STORAGEBUCKET,
-  messagingSenderId: FIREBASE_MESSAGINGSENDERID,
-  appId: FIREBASE_APPID,
+  apiKey: String(FIREBASE_APIKEY ?? ''),
+  authDomain: String(FIREBASE_AUTHDOMAIN ?? ''),
+  projectId: String(FIREBASE_PROJECTID ?? ''),
+  storageBucket: String(FIREBASE_STORAGEBUCKET ?? ''),
+  messagingSenderId: String(FIREBASE_MESSAGINGSENDERID ?? ''),
+  appId: String(FIREBASE_APPID ?? ''),
 };
 
 // Initialize Firebase
