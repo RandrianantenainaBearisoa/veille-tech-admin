@@ -41,7 +41,7 @@ jobs:
           # Gardez toutes vos variables d'environnement ici
           QCLI_FIREBASE_API_KEY: ${{ secrets.QCLI_FIREBASE_API_KEY }}
           QCLI_FIREBASE_AUTH_DOMAIN: ${{ secrets.QCLI_FIREBASE_AUTH_DOMAIN }}
-          QCLI_FIREBASE_PROJECT_ID: ${{ secrets.QCLI_FIREBASE_PROJECT_ID }}
+          QCLI_FIREBASE_PROJECTID: ${{ secrets.QCLI_FIREBASE_PROJECTID }}
           QCLI_FIREBASE_STORAGE_BUCKET: ${{ secrets.QCLI_FIREBASE_STORAGE_BUCKET }}
           QCLI_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.QCLI_FIREBASE_MESSAGING_SENDER_ID }}
           QCLI_FIREBASE_APP_ID: ${{ secrets.QCLI_FIREBASE_APP_ID }}
